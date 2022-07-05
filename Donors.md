@@ -1,5 +1,12 @@
 # Donors
 
 
-#Individuals
+# Individuals
+
+
 eth PingPangMan
+
+
+# Advise
+
+ Niko
