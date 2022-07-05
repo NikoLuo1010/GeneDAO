@@ -5,7 +5,7 @@ GeneDAO unlock Web 3.0 with Bioinformatics
 # Individuals
 
 
-PingPangMan
+张轶
 
 DingZong
 
