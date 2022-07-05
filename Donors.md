@@ -4,7 +4,7 @@
 # Individuals
 
 
-eth PingPangMan
+PingPangMan
 
 
 # Advise
