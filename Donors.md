@@ -4,7 +4,7 @@ GeneDAO unlock Web 3.0 with Bioinformatics
 
 # Individuals
 
-Donald Ding
+**Donald Ding**
 
 张轶
 
