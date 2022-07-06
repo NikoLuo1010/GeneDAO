@@ -7,7 +7,7 @@ GeneDAO unlock Web 3.0 with Bioinformatics
 
 张轶
 
-fuck gov
+earth gov
 
 Pliro
 
