@@ -15,8 +15,6 @@ Pliro
 
 # Advise
 
-Niko
-
 BAO
 
 Kev
