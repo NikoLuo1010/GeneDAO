@@ -4,6 +4,7 @@ GeneDAO unlock Web 3.0 with Bioinformatics
 
 # Individuals
 
+Donald Ding
 
 张轶
 
@@ -15,7 +16,6 @@ Tom Liu
 
 🇰🇷 Heejae Lim
 
-Donald Ding
 
 # Advise
 
