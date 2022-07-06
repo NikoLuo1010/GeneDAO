@@ -7,10 +7,16 @@ GeneDAO unlock Web 3.0 with Bioinformatics
 
 张轶
 
-DingZong
+fuck gov
 
 Pliro
 
+
+
 # Advise
 
-🌎 Niko
+Niko
+
+BAO
+
+Kev
