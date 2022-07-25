@@ -6,8 +6,6 @@ GeneDAO unlock Web 3.0 with Bioinformatics
 
 **Donald Ding**
 
-张将军
-
 earth gov
 
 Tom Liu
