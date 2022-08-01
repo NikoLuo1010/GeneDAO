@@ -1,0 +1,36 @@
+/ SPDX-License-Identifier: MIT
+pragma solidity ^0.8.15;
+
+GeneCoin
+
+interface IERC20 {
+
+    // 总供应量
+    function totalSupply(210000000000) external view returns (uint);
+
+    // 地址的余额
+    function balanceOf(address account) external view returns (uint);
+
+
+    // 转移 Token
+    function transfer(address recipient, uint amount) external returns (bool);
+
+    // 返回spender仍然允许提取的金额
+    function allowance(address owner, address spender) external view returns (uint);
+
+    // 授权spender 及金额数量
+    function approve(address spender, uint amount) external returns (bool);
+
+    // 该transferFrom方法用于提款工作流程，允许合约代表你转移代币。
+    function transferFrom(
+        address sender,
+        address recipient,
+        uint amount
+    ) external returns (bool);
+
+    // 触发事件: 转移代币
+    event Transfer(address indexed from, address indexed to, uint value);
+
+    // 触发事件: 授权代币
+    event Approval(address indexed owner, address indexed spender, uint value);
+}
