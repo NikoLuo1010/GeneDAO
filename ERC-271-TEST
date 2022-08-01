@@ -1,6 +1,6 @@
-pragma solidity ^0.8.6;
+pragma solidity ^0.8.15;
 
-// 一个标准方法以发布和检测智能合约实现了哪些接口。
+
 interface IERC165 {
     /// @notice 查询一个合约时候实现了一个接口
     /// @param interfaceID  参数：接口ID, 参考上面的定义
