@@ -1,0 +1,89 @@
+from flask import Flask, render_template, request, jsonify
+import os
+import json
+import requests
+import hashlib
+import bitcoin
+from web3 import Web3
+
+app = Flask(__name__)
+
+# 加载基因序列
+def load_genome_sequence():
+    if os.path.exists('genome_sequence.txt'):
+        with open('genome_sequence.txt', 'r') as f:
+            return f.read()
+    else:
+        return None
+
+# 创建 Bitcoin 钱包
+def create_bitcoin_wallet(genome_sequence):
+    # 生成随机私钥
+    private_key = bitcoin.random_key()
+
+    # 将私钥和基因序列哈希拼接，然后生成公钥
+    hashed_key = hashlib.sha256((private_key + genome_sequence).encode()).hexdigest()
+    public_key = bitcoin.privkey_to_pubkey(hashed_key)
+
+    # 通过公钥生成 Bitcoin 地址
+    bitcoin_address = bitcoin.pubkey_to_address(public_key)
+
+    # 将私钥、公钥和地址保存到本地
+    data = {'private_key': hashed_key, 'public_key': public_key, 'address': bitcoin_address}
+    with open('bitcoin_wallet.json', 'w') as f:
+        json.dump(data, f)
+
+    return data
+
+# 加载 Bitcoin 钱包
+def load_bitcoin_wallet(genome_sequence):
+    if os.path.exists('bitcoin_wallet.json'):
+        with open('bitcoin_wallet.json', 'r') as f:
+            data = json.load(f)
+            # 检查钱包密钥是否匹配基因序列
+            if hashlib.sha256((data['private_key'] + genome_sequence).encode()).hexdigest() == data['private_key']:
+                return data
+            else:
+                return None
+    else:
+        return None
+
+# 发送 Bitcoin 转账请求
+def send_bitcoin_transaction(to_address, amount, genome_sequence):
+    data = load_bitcoin_wallet(genome_sequence)
+    if data is None:
+        return None
+
+    # 获取当前余额
+    unspent_outputs = bitcoin.unspent(bitcoin.pubkey_to_address(data['public_key']))
+    balance = sum(output['value'] for output in unspent_outputs)
+
+    # 检查余额是否足够
+    if balance < amount:
+        return None
+
+    # 构建交易
+    tx_inputs = []
+    tx_outputs = []
+    total_input_value = 0
+
+    for output in unspent_outputs:
+        if total_input_value >= amount:
+            break
+
+        tx_inputs.append(output)
+        total_input_value += output['value']
+
+    tx_outputs.append((amount, to_address))
+
+    # 计算手续费
+    fee = bitcoin.estimate_fee()
+
+    # 计算找零
+    change = total_input_value - amount - fee
+    if change > 0:
+        tx_outputs.append((change, bitcoin.pubkey_to_address(data['public_key'])))
+
+    # 构建交易并签名
+    tx = bitcoin.mktx(tx_inputs, tx_outputs)
+    signed_tx = bitcoin.sign(tx, 0
